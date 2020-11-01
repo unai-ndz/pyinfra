@@ -25,7 +25,7 @@ jobs:
   include:
     - stage: Mypy type check
       python: '3.8'
-      script: mypy
+      script: mypy pyinfra/ pyinfra_cli/
 
     - stage: Local integration test
       python: '3.8'
