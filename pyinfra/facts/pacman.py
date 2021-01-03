@@ -4,6 +4,29 @@ from .util.packaging import parse_packages
 
 PACMAN_REGEX = r'^([a-zA-Z\-]+)\s([0-9\._+a-z\-]+)'
 
+class PacmanUnpackGroups(FactBase):
+    '''
+    Gets a list of packages/groups and returns the
+    packages and the groups unpacked into packages:
+
+    .. code:: python
+
+        {
+            'package_name',
+            'package_name',
+        }
+    '''
+
+    requires_command = 'pacman'
+
+    default = dict
+
+    def command(self, pkg_list):
+        pkgs_str = " ".join(pkg_list)
+        return 'pacman -S --print-format "%n" {0}'.format(pkgs_str)
+
+    def process(self, output):
+        return output
 
 class PacmanPackages(FactBase):
     '''
